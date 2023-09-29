@@ -13,9 +13,9 @@ class Date
     public:
     Date()
     {
-        this->day=9;
-        this->month=4;
-        this->year=2001;
+        this->day=0;
+        this->month=0;
+        this->year=0;
 
     }
     Date(int day,int month,int year)
@@ -24,12 +24,6 @@ class Date
         this->month =month;
         this->year =year;
     }
-    /*
-    void addemployeeid()
-    {
-    
-    }
-    */
     
     void acceptDate()
     {
@@ -48,6 +42,7 @@ class Date
     }
 
 };
+//dependency class
 class person
 {
     private:
@@ -62,18 +57,20 @@ class person
         this->addr="karad";
         
     }
-    person(string name,string addr)
+    person(string name,string addr,int day,int month,int year):birth_Date(day,month,year)
     {
         this->name=name;
         this->addr=addr;
-        
     }
+        
+    
     void accept()
     {
         cout<<"Enter the name="<<endl;
         cin>>this->name;
         cout<<"Enter the addr="<<endl;
         cin>>this->addr;
+        cout << "Enter Birth Date = " << endl;
         birth_Date.acceptDate();
         
     }
@@ -82,11 +79,9 @@ class person
         cout<<"name="<<this->name<<endl;
         cout<< "addr="<<this->addr<<endl;
         cout<<"Date of Birth is: "<<endl;
-
+        cout << "Birth date = ";
         birth_Date.displayDate();
     }
-
-
 };
 class employee
 {
@@ -99,34 +94,35 @@ class employee
     public:
     employee()
     {
-        this->id=101;
-        this->sal=1000;
-        this->dept= "sales";
+        this->id=0;
+        this->sal=0;
+        this->dept= " "; 
 
     }
-    employee(int id,float sal,string dept,Date doj )
+    employee(int id,float sal,string dept,int day,int month,int year):doj(day,month,year)
     {
-        this->id=id;
-        this->sal=sal;
-        this->dept= "";
+        this->id = id;
+        this->sal = sal;
+        this->dept= dept ;
+
     }
-    void accept()
+    void acceptemployee()
     {
-        cout<<"enter the id="<<endl;
+        cout<<"enter id ="<<endl;
         cin>>this->id;
-        cout<<"enter the sal="<<endl;
+        cout<<"enter sal ="<<endl;
         cin>>this->sal;
-        cout<<"enter the dept="<<endl;
+        cout<<"enter dept ="<<endl;
         cin>>this->dept;
+        cout << "Enter Date Of joining = " << endl;
         doj.acceptDate();
-
     }
-    void display()
+    void displayemployee()
     {
-        cout<<"enter id"<<this->id<<endl;
-        cout<<"enter sal"<<this->sal<<endl;
-        cout<<"enter dept"<<this->dept<<endl;
-        cout<<"Date of joining is: "<<endl;
+        cout<<"employee id = "<<this->id<<endl;
+        cout<<"employee sal = "<<this->sal<<endl;
+        cout<<"employee dept = "<<this->dept<<endl;
+        cout<<"Date of joining is = "<<endl;
         doj.displayDate();
     }
 
@@ -138,12 +134,19 @@ class employee
 
 int main()
 {
-    employee d1;
-    d1.accept();
-    d1.display();
-    person p1;
-    p1.accept();
-    p1.display();
+    cout<<"****************************"<<endl;
+     employee d1;
+    d1.acceptemployee();
+    cout<<"--------------"<<endl;
+    d1.displayemployee();
+   
+    cout<<"****************************"<<endl;
+    
+    employee d2(2 ,2000 ,"manager",9,4,2001);
+    //d2.acceptemployee();
+    d2.displayemployee();
+    cout<<"****************************"<<endl;
+    
     return 0;
 }
 
